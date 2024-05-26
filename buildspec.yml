@@ -3,7 +3,15 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo $AWS_DEFAULT_REGION
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_URL
   build:
     commands:
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t $ECR_REPOSITORY_URL:$CODEBUILD_BUILD_ID .
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $ECR_REPOSITORY_URL:$CODEBUILD_BUILD_ID
