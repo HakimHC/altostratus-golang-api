@@ -19,5 +19,6 @@ phases:
       - echo "{\"ImageURI\": \"$ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION\"}" > imageDetail.json
 
 artifacts:
-  files: imageDetail.json
+  files:
+  - imageDetail.json
     
