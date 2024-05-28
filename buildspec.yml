@@ -20,6 +20,7 @@ phases:
       # - printf '[{"name":"go_api","imageUri":"%s"}]' "$ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION" > imagedefinitions.json
       # - printf '[{"name":"go_api","imageUri":"%s"}]' "$ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION" > imageDetail.json
       - cat imageDetail.json
+      - cat appspec.yml
 
 # artifacts:
 #   files:
