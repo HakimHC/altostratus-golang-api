@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginxdemos/hello:latest
 
 EXPOSE 80
 
