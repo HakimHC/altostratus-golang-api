@@ -7,3 +7,4 @@ Resources:
         LoadBalancerInfo:
           ContainerName: "go_api"
           ContainerPort: 80
+        PlatformVersion: "LATEST"
