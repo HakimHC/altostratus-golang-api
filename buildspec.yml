@@ -17,7 +17,7 @@ phases:
       - echo Pushing the Docker image...
       - docker push $ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION
       # - printf '{"ImageURI":"%s"}' $ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION > imageDetail.json
-      - printf '[{"name":"go_api","imageUri":"%s"}]' $ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION > imagedefinitions.json
+      - printf '[{"name":"go_api","imageUri":"%s"}]' "$ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION" > imagedefinitions.json
 
 artifacts:
   files:
