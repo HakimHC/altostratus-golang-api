@@ -22,22 +22,15 @@ phases:
       - cat imageDetail.json
       - cat appspec.yml
 
-# artifacts:
-#   files:
-#     - imageDetail.json
-#     #- imagedefinitions.json
-#     - appspec.yml
-#     - taskdef.json
-
 artifacts:
   files:
     - taskdef.json
-    - appspec.yaml
+    - appspec.yml
     - imageDetail.json
   secondary-artifacts:
     DefinitionArtifact:
       files:
-        - appspec.yaml
+        - appspec.yml
         - taskdef.json
     ImageArtifact:
       files:
