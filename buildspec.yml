@@ -16,13 +16,27 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push $ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION
-      - printf '{"ImageURI":"%s"}' "$ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION" > imageDetail.json
-      - cat imageDetail.json
+      # - printf '{"ImageURI":"%s"}' "$ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION" > imageDetail.json
       #- printf '[{"name":"go_api","imageUri":"%s"}]' "$ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION" > imagedefinitions.json
+      - printf '[{"name":"go_api","imageUri":"%s"}]' "$ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION" > imageDetail.json
+      - cat imageDetail.json
+
+# artifacts:
+#   files:
+#     - imageDetail.json
+#     #- imagedefinitions.json
+#     - appspec.yml
+#     - taskdef.json
 
 artifacts:
   files:
-    - imageDetail.json
-    #- imagedefinitions.json
-    - appspec.yml
     - taskdef.json
+    - appspec.yaml
+  secondary-artifacts:
+    DefinitionArtifact:
+      files:
+        - appspec.yaml
+        - taskdef.json
+    ImageArtifact:
+      files:
+        - imageDetail.json
