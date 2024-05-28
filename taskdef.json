@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "go_api",
-            "image": "PLACEHOLDER",
+            "image": "<IMAGE_NAME>",
             "essential": true,
             "portMappings": [
                 {
