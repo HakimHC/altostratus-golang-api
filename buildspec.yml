@@ -24,3 +24,4 @@ artifacts:
     # - imageDetail.json
     - imagedefinitions.json
     - appspec.yml
+    - taskdef.json
