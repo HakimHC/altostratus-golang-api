@@ -5,6 +5,6 @@ Resources:
       Properties:
         TaskDefinition: <TASK_DEFINITION>
         LoadBalancerInfo:
-          ContainerName: "go_api"
+          ContainerName: "api"
           ContainerPort: 80
         PlatformVersion: "LATEST"
