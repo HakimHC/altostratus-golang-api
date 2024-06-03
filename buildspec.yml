@@ -6,6 +6,9 @@ phases:
       - echo Logging in to Amazon ECR...
       - echo $CODEBUILD_RESOLVED_SOURCE_VERSION
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_URL
+      - echo Replacing placeholders
+      - bash ./replace_placeholders.sh
+      - cat taskdef.json
   build:
     commands:
       - echo Build started on `date`
@@ -17,10 +20,6 @@ phases:
       - echo Pushing the Docker image...
       - docker push $ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION
       - printf '{"ImageURI":"%s"}' "$ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION" > imageDetail.json
-      # - printf '[{"name":"go_api","imageUri":"%s"}]' "$ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION" > imagedefinitions.json
-      # - printf '[{"name":"go_api","imageUri":"%s"}]' "$ECR_REPOSITORY_URL:$CODEBUILD_RESOLVED_SOURCE_VERSION" > imageDetail.json
-      - cat imageDetail.json
-      - cat appspec.yml
 
 artifacts:
   files:
