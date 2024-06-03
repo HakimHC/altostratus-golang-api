@@ -8,7 +8,11 @@ import (
 func AsteroidRoutes(e *echo.Echo) {
 	api := e.Group("/api/v1", serverHeader)
 
+	api.GET("/asteroids", controllers.GetAllAsteroids)
+	api.GET("/asteroids/:id", controllers.GetAsteroidById)
 	api.POST("/asteroids", controllers.AsteroidsPost)
+	api.DELETE("/asteroids/:id", controllers.DeleteAsteroidById)
+	// TODO: patch method
 }
 
 func serverHeader(next echo.HandlerFunc) echo.HandlerFunc {
