@@ -1,5 +1,6 @@
 {
-    "executionRoleArn": "arn:aws:iam::506367240739:role/ecsTaskExecutionRole",
+    "executionRoleArn": "${EXECUTION_ROLE_ARN}",
+    "taskRoleArn": "${TASK_ROLE_ARN}",
     "containerDefinitions": [
         {
             "name": "api",
@@ -10,6 +11,21 @@
                     "hostPort": 80,
                     "protocol": "tcp",
                     "containerPort": 80
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "awslogs-auth-service",
+                    "awslogs-region": "${AWS_REGION}",
+                    "awslogs-stream-prefix": "${LOG_GROUP_NAME}"
+                }
+            },
+            "secrets": [
+                {
+                    "name": "JWT_SECRET",
+                    "valueFrom": "${JWT_SECRET_ARN}"
                 }
             ]
         }
