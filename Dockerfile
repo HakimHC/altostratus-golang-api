@@ -15,3 +15,4 @@ RUN chmod +x /usr/bin/api_service
 EXPOSE 80
 
 CMD ["/usr/bin/api_service"]
+
