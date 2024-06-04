@@ -2,13 +2,14 @@ package routes
 
 import (
 	"github.com/HakimHC/altostratus-golang-api/controllers"
+	"github.com/HakimHC/altostratus-golang-api/middleware"
 	"github.com/labstack/echo/v4"
 )
 
 func AsteroidRoutes(e *echo.Echo) {
 	api := e.Group("/api/v1", serverHeader)
 
-	//api.Use(middleware.JWTMiddleware)
+	api.Use(middleware.JWTMiddleware)
 
 	api.GET("/asteroids", controllers.GetAllAsteroids)
 	api.GET("/asteroids/:id", controllers.GetAsteroidById)
