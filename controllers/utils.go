@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb/expression"
 	"github.com/labstack/echo/v4"
 	"net/http"
+	"reflect"
 )
 
 func putAsteroidInDynamoDB(asteroid models.Asteroid, tableName string) error {
@@ -109,6 +110,23 @@ func fetchAllAsteroids(tableName string) ([]models.Asteroid, error) {
 	}
 
 	return asteroids, nil
+}
+
+func mergeAsteroid(existing models.Asteroid, update models.AsteroidsPatchDTO) models.Asteroid {
+	v := reflect.ValueOf(update)
+	t := v.Type()
+	result := existing
+
+	for i := 0; i < v.NumField(); i++ {
+		field := v.Field(i)
+		fieldType := t.Field(i)
+
+		if !field.IsZero() {
+			reflect.ValueOf(&result).Elem().FieldByName(fieldType.Name).Set(field)
+		}
+	}
+
+	return result
 }
 
 func ErrorResponse(c echo.Context, statusCode int, err string) error {

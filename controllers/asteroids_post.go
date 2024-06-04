@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func AsteroidsPost(c echo.Context) error {
+func PostAsteroids(c echo.Context) error {
 	body := new(models.AsteroidsPostDTO)
 
 	if err := c.Bind(body); err != nil {
