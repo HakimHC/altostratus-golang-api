@@ -17,9 +17,9 @@
                 "logDriver": "awslogs",
                 "options": {
                     "awslogs-create-group": "true",
-                    "awslogs-group": "awslogs-auth-service",
+                    "awslogs-group": "${LOG_GROUP_NAME}",
                     "awslogs-region": "${AWS_REGION}",
-                    "awslogs-stream-prefix": "${LOG_GROUP_NAME}"
+                    "awslogs-stream-prefix": "api-service"
                 }
             },
             "secrets": [
